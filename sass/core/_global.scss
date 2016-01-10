@@ -9,12 +9,12 @@ body {
   background-color: $background-color;
   font-size: $base-font-size;
   line-height: $base-line-height;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 a {
-  @include link-colors($link-color, $link-color-hover);
+  @include link-colors($boyu, $boyu-hover);
   text-decoration: none;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid $boyu;
 }
 a:hover {
   text-decoration: none;
@@ -26,9 +26,10 @@ a:hover {
 #content {
   position: relative;
   height: auto;
-  // min-height: 75%;
-  margin-top: 30px;
-  @include at-breakpoint($pad) {
+  max-width: 768px;
+  width: 100%;
+  margin: 0 auto;
+  @include susy-breakpoint($pad, 8) {
     height: inherit;
   }
 }

@@ -16,13 +16,13 @@
   &:hover {
     background: #eee;
   }
-  @include at-breakpoint($pad) {
+  @include susy-breakpoint($pad, 8) {
     display: none;
   }
 }
 .mobile-hide {
   display: none;
-  @include at-breakpoint($pad) {
+  @include susy-breakpoint($pad, 8) {
     display: initial;
   }
 }

@@ -62,7 +62,7 @@
     border-bottom-color: $white;
   }
 
-  @include at-breakpoint($pad) {
+  @include susy-breakpoint($pad, 8) {
     .dropdown-menu li a {
       color: $main-color;
     }
@@ -73,7 +73,7 @@
       width: 40%;
     }
   }
-  @include at-breakpoint($desktop) {
+  @include susy-breakpoint($desktop, 10) {
     .navbar-form {
       width: 30%;
     }
@@ -122,6 +122,6 @@ label.checkbox {
 }
 
 .btn-default.active {
-  border: 2px solid black;
+  border: 2px solid $boyu;
   @include box-shadow( 0 0 20px rgba(white,.7));
 }

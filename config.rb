@@ -1,4 +1,3 @@
-
 sourcemap = false # by Fire.app 
 css_dir = "stylesheets" # by Fire.app 
 sass_dir = "sass" # by Fire.app 

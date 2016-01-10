@@ -58,7 +58,7 @@
   height: 24px;
   @include border-radius(12px);
   background: rgba(245, 220, 88, 0.5);
-  @include at-breakpoint($desktop) {
+  @include susy-breakpoint($desktop, 10) {
     width: 12px;
     height: 12px;
     @include border-radius(0px);

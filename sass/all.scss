@@ -16,6 +16,8 @@
 @import "core/global";
 
 // partial
+@import "partials/logo";
+@import "partials/copyright";
 @import "partials/bootstrap";
 @import "partials/button";
 @import "partials/corner";
@@ -29,16 +31,4 @@
 
 #formbuttons {
   margin-top: 6em;
-}
-
-#normalSubmit {
-  padding: 0;
-  margin: 0;
-  border: none;
-  background-color: transparent;
-  color: black;
-  border-bottom: 2px solid black;
-  font-size: 24px;
-  font-weight: normal;
-  line-height: 1.3;
 }

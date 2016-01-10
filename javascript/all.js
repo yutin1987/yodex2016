@@ -133,7 +133,7 @@ function createImage(template,source,x,y,w,h){
 
   var ctx = resize_canvas.getContext("2d");
   ctx.rect(0,0,500,500);
-  ctx.fillStyle="#CCCCCC";
+  ctx.fillStyle="#E31770";
   ctx.fill();
   ctx.drawImage(userimage,x,y,w,h);
   ctx.drawImage(cover,0,0,500,500);
@@ -231,8 +231,7 @@ function loadImage(files) {
 
     $('<img/>').attr('src',base64)
     .load(function() {
-      var
-      value = $('input[name=template]:checked').val(),
+      var value = $('input[name=template]:checked').val();
       container_size = $userimage.width(),
       userimage_size = [this.width,this.height];
       resizeDragger(userimage_size,container_size,value);
