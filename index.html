@@ -4,10 +4,10 @@
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
-<title>支持『柏瑜』頭像產生器</title>
+<title>告訴我們你在乎台灣什麼樣的設計</title>
 <link href="images/favicon.png" rel="shortcut icon">
 <link href="vender/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="vender/jquery-ui.css" rel="stylesheet" />
 <link href="vender/jquery.ui.core.css" rel="stylesheet" />
 <link href="vender/jquery.ui.resizable.css" rel="stylesheet" />
 <link href="vender/ie-alert/iealert/style.css" rel="stylesheet" />
@@ -25,6 +25,12 @@
     <img src="images/logo.png" />
   </div>
   <div class="row">
+    <div class="col-sm-12 col-xs-12 control-box">
+      <p>你也覺得，台灣應該更在乎設計?</p>
+      <p>一起向周圍的人說「我在乎台灣設計」吧!</p>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-sm-12 control-box">
       <section>
         <h2>
@@ -35,41 +41,31 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-6 col-xs-12 control-box">
+    <div class="col-sm-12 col-xs-12 control-box">
       <section>
         <h2>
-          <span>步驟二：選擇一個曾柏瑜</span>
+          <span>步驟二：告訴我們你在乎台灣什麼樣的設計</span>
         </h2>
-        <div id="templates" class="text-center" data-toggle="buttons">
-          <label class="template-label btn btn-default active" style="background-image: url(images/sample.jpg);">
-            <img src="images/object/1.png">
-            <input type="radio" name="template" value="1" autocomplete="off" checked="checked">
-          </label>
-          <label class="template-label btn btn-default" style="background-image: url(images/sample.jpg);">
-            <img src="images/object/2.png">
-            <input type="radio" name="template" value="2" autocomplete="off">
-          </label>
-          <label class="template-label btn btn-default" style="background-image: url(images/sample.jpg);">
-            <img src="images/object/3.png">
-            <input type="radio" name="template" value="3" autocomplete="off">
-          </label>
+        <div id="templates">
+          <textarea rows="3" style="width: 100%"></textarea>
         </div>
       </section>
     </div>
-    <div class="col-sm-6 col-xs-12 control-box">
+    <div class="col-sm-12 col-xs-12 control-box">
       <section>
         <h2>
-          <span>步驟三：調整一下大小</span>
+          <span>步驟三：調整位置</span>
         </h2>
-        <div class="preview">
-          <div id="userimage">
-            <div class="inner" style="background-image: url(images/sample.jpg)"></div>
-            <div id="size-slider"><span class="zoomber"></span><span class="zoomin">＋</span><span class="zoomout">－</span></div>
+        <div id="preview" class="preview">
+          <div id="userimage" style="background-image: url('images/sample.png')"></div>
+          <div class="coverwrap">
+            <div id="coverimage" style="background: rgba(72, 170, 245, 0.7)">
+              <div class="texter">我是</div>
+            </div>
           </div>
-          <div id="coverimage">
-            <div class="inner" style="background-image: url(images/object/1.png)"></div>
-            <div id="dragger"></div>
-          </div>
+          <div id="userdragger" class="dragger"></div>
+          <div id="coverdragger" class="dragger"></div>
+          <div id="size-slider"><span class="zoomber"></span><span class="zoomin">＋</span><span class="zoomout">－</span></div>
           <div id="loading"><div class="drop"><img src="images/loading.gif"></div></div>
         </div>
       </section>
@@ -85,16 +81,15 @@
     </div>
   </div>
 </div>
-
+<hr />
 <div id="copyright">
   <div>
-    <span>2015 © 新北市立法委員參選人</span>
-    <a href="https://www.facebook.com/poyu.tseng2016/" target="_blank">曾柏瑜</a>
-    <span>（新店．深坑．石碇．坪林．烏來）</span>
+    <a href="https://www.facebook.com/InsightofNewDesign" target="_blank">
+      <img src="./images/fb-big.png" />
+    </a>
   </div>
   <div>
-    <span>此網站由柏瑜粉絲製作，非官方 </span>
-    <a href="https://github.com/yutin1987/poyusticker" target="_blank">Github 原始碼</a>
+    <span>2016 © 我在乎設計</span>
   </div>
 </div>
 
@@ -108,8 +103,8 @@
 <canvas id="thumb" class="hide"></canvas>
 <canvas id="result" class="hide"></canvas>
 <a id="download" class="hide" download="poyusticker.png">Download</a>
-<script src="//code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="vender/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="vender/jquery-ui.min.js"></script>
 <script src="vender/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="vender/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
 <script src="vender/jquery.ui.rotatable.min.js" type="text/javascript"></script>

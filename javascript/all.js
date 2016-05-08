@@ -1,10 +1,14 @@
 var
-$userimage = $('#userimage .inner'),
-$coverimage = $('#coverimage .inner'),
-$dragger = $('#dragger'),
+$userimage = $('#userimage'),
+$coverimage = $('#coverimage'),
+$udragger = $('#userdragger'),
+$cdragger = $('#coverdragger'),
 $sizer = $('#size-slider'),
 $loading = $('#loading');
+$pretext = $('#coverimage .texter'),
+$text = $('#templates textarea'),
 $uploading = $('#uploading');
+$preview = $('#preview');
 
 $(window).load(function()
 {
@@ -15,6 +19,17 @@ $(window).load(function()
 });
 $(document).ready(function()
 {
+  $text.val('我是\n我在乎');
+  $pretext.html('我是<br/>我在乎');
+  $coverimage.css({
+    left: 0,
+    top: $preview.height() * 0.66
+  });
+  $cdragger.css({
+    left: 0,
+    top: $preview.height() * 0.66
+  });
+
   // ie alert
   $("body").iealert({
     support: 'ie9',
@@ -25,13 +40,25 @@ $(document).ready(function()
     upgradeLink: 'http://www.google.com/chrome/'
   });
 
+  $text.on('keyup', function(e) {
+    $pretext.html(e.target.value.replace(/(\n|\r\n)/gi, '<br />'));
+  });
+
   // dragger
-  $dragger.draggable({
-    drag: function(event) {
-      $userimage.css('background-position',$dragger.css('left')+' '+$dragger.css('top'));
+  $udragger.draggable({
+    drag: function(e) {
+      $userimage.css('background-position',$udragger.css('left')+' '+$udragger.css('top'));
       if($userimage.hasClass('dragged') == false) $userimage.addClass('dragged');
-      var value = $('input[name=template]:checked').val();
-      if(value == 9 || value == 10) $userimage.attr('class','inner');
+    }
+  });
+
+  $cdragger.draggable({
+    drag: function(e) {
+      $coverimage.css({
+        left: $cdragger.css('left'),
+        top: $cdragger.css('top')
+      });
+      if($coverimage.hasClass('dragged') == false) $coverimage.addClass('dragged');
     }
   });
 
@@ -53,35 +80,12 @@ $(document).ready(function()
         height = size[1]*(ui.value)/100,
         left = center[0] - width*0.5,
         top = center[1] - height*0.5;
-        $dragger
-          .css('width',width+'px').css('height',height+'px')
-          .css('top',top+'px').css('left',left+'px');
         $userimage
           .css('background-size',width+'px '+height+'px')
           .css('background-position',left+'px '+top+'px');
       });
 
     }
-  });
-
-  // change template
-  $('body').delegate('input[name=template]','change',function(){
-    var
-    width,
-    value = $(this).val(),
-    url = 'images/object/'+value+'.png';
-
-    $coverimage.css('background-image','url('+url+')');
-    if($userimage.hasClass('dragged') == true) $userimage.attr('class', 'inner dragged');
-    else $userimage.attr('class', 'inner');
-
-    $('<img/>').attr('src',getBackgroundImage($userimage))
-    .load(function() {
-      var
-      size = [this.width,this.height],
-      container_size = $userimage.width();
-      resizeDragger(size,container_size,value);
-    });
   });
 
   $("#normalSubmit").click(function() {
@@ -92,13 +96,14 @@ $(document).ready(function()
     scale = basesize/500;
 
     var
-    template = $('input[name=template]:checked').val(),
     source = $('#source').val(),
     w = size[0]/scale,
     h = size[1]/scale,
     x = position[0]/scale,
     y = position[1]/scale;
-    createImage(template,source,x,y,w,h);
+    cleft = px2int($coverimage.css('left'));
+    ctop = px2int($coverimage.css('top'));
+    createImage(source, x, y, w, h, cleft, ctop);
   });
 });
 $(window).konami({
@@ -120,10 +125,7 @@ $(window).konami({
   }
 });
 
-function createImage(template,source,x,y,w,h){
-  var cover = new Image();
-  cover.src = 'images/object/'+template+'.png';
-
+function createImage(source, x, y, w, h, cleft, ctop){
   var userimage = new Image();
   userimage.src = source;
 
@@ -132,11 +134,21 @@ function createImage(template,source,x,y,w,h){
   resize_canvas.height = 500;
 
   var ctx = resize_canvas.getContext("2d");
-  ctx.rect(0,0,500,500);
-  ctx.fillStyle="#E31770";
+  ctx.rect(0, 0, 500, 500);
+  ctx.fillStyle = '#3CA1E7';
   ctx.fill();
-  ctx.drawImage(userimage,x,y,w,h);
-  ctx.drawImage(cover,0,0,500,500);
+  ctx.drawImage(userimage, x, y, w, h);
+
+  var ctxRect = resize_canvas.getContext("2d");
+  ctxRect.fillStyle = 'rgba(72, 170, 245, 0.7)';
+  ctxRect.fillRect(0 + cleft, 0 + ctop, 500 * 0.5, 500 * 0.25);
+
+  var ctxText = resize_canvas.getContext("2d");
+  ctxText.fillStyle = '#FFFFFF';
+  ctxText.font = '30px Noto Sans TC';
+  $text.val().split("\n").map(function(text, idx) {
+    ctxText.fillText(text, 10 + cleft, 9 + 30 + (33 * idx) + ctop);
+  });
 
   var base64 = resize_canvas.toDataURL("image/png");
 
@@ -308,9 +320,6 @@ function resizeDragger(size,wrapper,value,upload)
     }
   }
 
-  $dragger
-    .css('width',width+'px').css('height',height+'px')
-    .css('top',top+'px').css('left',left+'px');
   $userimage
     .css('background-size',width+'px '+height+'px')
     .css('background-position',left+'px '+top+'px');

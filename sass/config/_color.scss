@@ -3,14 +3,14 @@ $white : #FFFFFE;
 $black : #222221;
 
 // main color
-$main-color: #E52E8A;
+$main-color: #111;
 $main-color-light    : lighten($main-color, 10%);
 $main-color-dark     : darken($main-color, 10%);
 
 // background color
 $background-color : #FFFFFE;
-$boyu: #E31770;
-$boyu-hover: #E31770;
+$boyu: #3CA1E7;
+$boyu-hover: #3CA1E7;
 
 // text color
 $text-black         : rgba(white,.8);
@@ -18,6 +18,6 @@ $text-black-light   : #999;
 $text-gray          : #8A8A8A;
 $text-gray-light    : lighten($text-gray, 10%);
 
-// link color 
+// link color
 $link-color       : white;
 $link-color-hover : white;
